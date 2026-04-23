@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dk2layll8wuv4"]
+
+[ext_resource type="Script" uid="uid://b65bxw2k7phb7" path="res://hud.gd" id="1_37p78"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1843679794]
+script = ExtResource("1_37p78")
+
+[node name="Label" type="Label" parent="." unique_id=900196714]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Make a move"
+
+[node name="EndTurnButton" type="Button" parent="." unique_id=362888740]
+offset_left = 107.0
+offset_top = 24.0
+offset_right = 187.0
+offset_bottom = 55.0
+text = "End Turn"
+
+[connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]

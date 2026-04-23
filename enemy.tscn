@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://55idnuylfve7"]
+
+[ext_resource type="Script" uid="uid://blwplsx2w0cf4" path="res://enemy.gd" id="1_7k104"]
+
+[sub_resource type="Gradient" id="Gradient_7k104"]
+offsets = PackedFloat32Array(0, 0.56296295, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.41214556, 0.27468094, 0.3746951, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4gyqm"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qi2p4"]
+noise = SubResource("FastNoiseLite_4gyqm")
+color_ramp = SubResource("Gradient_7k104")
+
+[node name="Enemy" type="Node2D" unique_id=358714719]
+script = ExtResource("1_7k104")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1525481419]
+position = Vector2(1.1920929e-07, 9.094947e-13)
+scale = Vector2(0.029296868, 0.029296868)
+texture = SubResource("NoiseTexture2D_qi2p4")
