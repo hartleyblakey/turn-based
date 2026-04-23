@@ -17,4 +17,12 @@ offset_right = 187.0
 offset_bottom = 55.0
 text = "End Turn"
 
+[node name="PlaceholderAttackButton" type="Button" parent="." unique_id=1682727650]
+offset_left = 103.0
+offset_top = 83.0
+offset_right = 195.0
+offset_bottom = 114.0
+text = "Attack"
+
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="PlaceholderAttackButton" to="." method="_on_placeholder_attack_button_pressed"]

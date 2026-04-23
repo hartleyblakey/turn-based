@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Enemy
+
 @export var faction = "Enemy"
 
 var turn_count: int = 0
@@ -7,6 +9,8 @@ var turn_count: int = 0
 func begin_turn(tilemap: TileMapLayer, entities) -> void:
 	for i in range(randi() % 10):
 		await move_random()
+	var opponent = find_closest_opponent(tilemap, entities)
+	opponent.take_damage(5)
 	pass
 
 func move_random():
@@ -38,12 +42,6 @@ func find_closest_opponent(tilemap: TileMapLayer, entities):
 			best_dist = dist
 			closest = opponent
 	return closest
-	
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func take_damage(dmg: int):
+	print("Enemy took %d damage" % dmg)

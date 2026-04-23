@@ -19,12 +19,23 @@ func begin_turn(tilemap: TileMapLayer, entities) -> void:
 	
 		if turn_action.action_type == TurnAction.Type.Move:
 			self.translate(Vector2(50.0, 0.0) * Vector2(turn_action.targets[0]))
-			
+		elif turn_action.action_type == TurnAction.Type.Attack:
+			var target = null
+			for entity in entities:
+				if entity.faction != faction:
+					target = entity
+					break;
+			if target != null:
+				target.take_damage(7)
 		SignalBus.request_player_action.emit()
 		turn_action = await SignalBus.player_action_response
 	
 	pass
 
+
+func take_damage(dmg: int) -> void:
+	print("Player took %d damage" % dmg)
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

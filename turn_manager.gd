@@ -4,6 +4,7 @@ extends Node
 
 var new_turn_takers = []
 var remaining_turn_takers = []
+var all_entities = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,6 +14,7 @@ func _ready() -> void:
 
 func add_turn_taker(new_entity) -> void:
 	new_turn_takers.push_front(new_entity)
+	all_entities.push_front(new_entity)
 	pass
 
 func process_next_round() -> void:
@@ -24,8 +26,12 @@ func process_next_round() -> void:
 	SignalBus.round_over.emit()
 
 func initialize_round() -> void:
+	new_turn_takers.clear()
+	remaining_turn_takers.clear()
+	all_entities.clear()
 	for turn_taker in get_tree().get_nodes_in_group('turn_taker'):
 		add_turn_taker(turn_taker)
+	
 	
 func process_next_turn() -> bool:
 	# add any new turn takers
@@ -36,15 +42,13 @@ func process_next_turn() -> bool:
 	remaining_turn_takers.append_array(new_turn_takers)
 	new_turn_takers.clear()
 	
-	var entities = remaining_turn_takers.duplicate()
-	
 	var turn_taker = remaining_turn_takers.pop_front()
 	
 	if turn_taker == null:
 		return false
 	
 	
-	await turn_taker.begin_turn(tilemap, entities)
+	await turn_taker.begin_turn(tilemap, all_entities)
 
 
 	return true
